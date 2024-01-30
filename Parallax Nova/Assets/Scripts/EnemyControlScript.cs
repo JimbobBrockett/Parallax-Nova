@@ -23,15 +23,15 @@ public class EnemyControlScript : MonoBehaviour
         timer = Random.Range(1, 6);
         if (SceneManager.GetActiveScene().name == "Level1")
         {
-            speed = 0.003f;
+            speed = 0.3f;
         }
         else if (SceneManager.GetActiveScene().name == "Level2")
         {
-            speed = 0.006f;
+            speed = 0.6f;
         }
         else if (SceneManager.GetActiveScene().name == "Level3")
         {
-            speed = 0.01f;
+            speed = 0.1f;
         }
     }
 
@@ -64,7 +64,8 @@ public class EnemyControlScript : MonoBehaviour
 
     private void EnemyMove()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y - (speed * Time.deltaTime), transform.position.z);
+
         if (transform.position.y < -1.4f)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControlScript>().MassiveDamagePlayer();

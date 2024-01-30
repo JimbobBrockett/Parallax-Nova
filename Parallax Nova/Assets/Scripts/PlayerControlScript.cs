@@ -58,7 +58,7 @@ public class PlayerControlScript : MonoBehaviour
         if ((Input.GetKeyDown("space") && SettingsScript.shootButtonNum == 0) ||
         (Input.GetMouseButtonDown(0) && SettingsScript.shootButtonNum == 1))
         {
-            Vector3 bulletSpawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+            Vector3 bulletSpawnPosition = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
             if (SceneManager.GetActiveScene().name != "Level3")
             {
                 Instantiate(bullet, bulletSpawnPosition, Quaternion.Euler(90f, 0f, 0f));
