@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyControlScript : MonoBehaviour
@@ -12,7 +10,6 @@ public class EnemyControlScript : MonoBehaviour
     public GameObject bullet;
     AudioSource blasterShotSound, deathSound;
 
-    // Start is called before the first frame update
     void Start()
     {
         AudioSource[] audios = GetComponents<AudioSource>();
@@ -38,7 +35,6 @@ public class EnemyControlScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!dead)
@@ -51,7 +47,7 @@ public class EnemyControlScript : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), new Quaternion(0, 0, 0, 0));
+                Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), Quaternion.Euler(90f, 0f, 0f));
                 blasterShotSound.Play();
                 timer = Random.Range(0, 6);
             }

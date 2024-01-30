@@ -1,20 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PistolScript : MonoBehaviour
 {
-
     AudioSource victoryTheme;
 
-    // Start is called before the first frame update
     void Start()
     {
         victoryTheme = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         victoryTheme.volume = SettingsScript.musicVolume;

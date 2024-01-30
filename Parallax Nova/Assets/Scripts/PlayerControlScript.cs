@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerControlScript : MonoBehaviour
@@ -11,7 +9,8 @@ public class PlayerControlScript : MonoBehaviour
     private bool dead = false;
     private float deathTimer;
     AudioSource blasterShotSound, deathSound;
-
+    private float movementSpeed = 5.0f;
+    private float edgeClampValue = 8.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,53 +43,32 @@ public class PlayerControlScript : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (Input.GetKey("a") || Input.GetKey("left"))
-        {
-            transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
-            if (transform.position.x < -10)
-            {
-                transform.position = new Vector3(-10, transform.position.y, transform.position.z);
-            }
-        }
-        if (Input.GetKey("d") || Input.GetKey("right"))
-        {
-            transform.position = new Vector3(transform.position.x + 0.1f, transform.position.y, transform.position.z);
-            if (transform.position.x > 10)
-            {
-                transform.position = new Vector3(10, transform.position.y, transform.position.z);
-            }
-        }
+        float horizontalInput = Input.GetAxis("Horizontal"); // Get input in the range [-1, 1]
+        Vector3 movement = new Vector3(horizontalInput, 0, 0);
+
+        transform.position += movement * movementSpeed * Time.deltaTime;
+
+        // Limit movement within certain boundaries
+        float clampedX = Mathf.Clamp(transform.position.x, -edgeClampValue, edgeClampValue);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     private void PlayerShoot()
     {
-        if (Input.GetKeyDown("space") && SettingsScript.shootButtonNum == 0)
+        if ((Input.GetKeyDown("space") && SettingsScript.shootButtonNum == 0) ||
+        (Input.GetMouseButtonDown(0) && SettingsScript.shootButtonNum == 1))
         {
+            Vector3 bulletSpawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             if (SceneManager.GetActiveScene().name != "Level3")
             {
-                Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                blasterShotSound.Play();
+                Instantiate(bullet, bulletSpawnPosition, Quaternion.Euler(90f, 0f, 0f));
             }
             else
             {
-                Instantiate(bullet, new Vector3(transform.position.x + 0.1f, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                Instantiate(bullet, new Vector3(transform.position.x - 0.1f, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                blasterShotSound.Play();
+                Instantiate(bullet, bulletSpawnPosition + new Vector3(0.2f, 0, 0), Quaternion.Euler(90f, 0f, 0f));
+                Instantiate(bullet, bulletSpawnPosition - new Vector3(0.2f, 0, 0), Quaternion.Euler(90f, 0f, 0f));
             }
-        }
-        else if (Input.GetMouseButtonDown(0) && SettingsScript.shootButtonNum == 1)
-        {
-            if (SceneManager.GetActiveScene().name != "Level3")
-            {
-                Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                blasterShotSound.Play();
-            }
-            else
-            {
-                Instantiate(bullet, new Vector3(transform.position.x + 0.1f, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                Instantiate(bullet, new Vector3(transform.position.x - 0.1f, transform.position.y + 0.5f, transform.position.z), new Quaternion(0, 0, 0, 0));
-                blasterShotSound.Play();
-            }
+            blasterShotSound.Play();
         }
     }
 
