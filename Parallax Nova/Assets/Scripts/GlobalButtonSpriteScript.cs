@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GlobalButtonSpriteScript : MonoBehaviour
@@ -10,7 +8,6 @@ public class GlobalButtonSpriteScript : MonoBehaviour
     private Image currentSprite;
     private RectTransform rectTrans;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentSprite = GetComponent<Image>();
@@ -18,7 +15,6 @@ public class GlobalButtonSpriteScript : MonoBehaviour
         rectTrans.localScale = new Vector3(2, 2, 1);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!LevelSelectionScript.levelOneComplete)
