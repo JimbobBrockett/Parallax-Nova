@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuAudioScript : MonoBehaviour
 {
-
     AudioSource menuAudio;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Temporary Solution to Set the initial Values
         menuAudio = GetComponent<AudioSource>();
+        SettingsScript.musicVolume = 0.5f;
+        SettingsScript.sfxVolume = 0.5f;
     }
 
     private void Awake()
@@ -27,7 +28,6 @@ public class MenuAudioScript : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
     void Update()
     {
         menuAudio.volume = SettingsScript.musicVolume;
