@@ -1,28 +1,24 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CreditsScript : MonoBehaviour
 {
-
     RectTransform currentPosition;
     Text creditsTextContent;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentPosition = GetComponent<RectTransform>();
         currentPosition.localPosition = new Vector3(0, -1150, 0);
-
         creditsTextContent = GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        currentPosition.localPosition = new Vector3(0, currentPosition.localPosition.y + 0.14f, 0);
+        currentPosition.localPosition = new Vector3(0, currentPosition.localPosition.y + (15.00f * Time.deltaTime), 0);
+
         if (currentPosition.localPosition.y > 1150)
         {
             StartCoroutine(EndOfSong());
@@ -40,7 +36,7 @@ public class CreditsScript : MonoBehaviour
                 "MartinJimbobBrockett\n" +
                 "\n" +
                 "Lead Asset Design and Creation\n" +
-                "Brian Lätt\n" +
+                "Brian Lätt (VerzatileDev)\n" +
                 "\n" +
                 "Lead Sound Design\n" +
                 "PEGONTHETRACK\n" +
@@ -103,7 +99,7 @@ public class CreditsScript : MonoBehaviour
                 "MartinJimbobBrockett\n" +
                 "\n" +
                 "Concepteur et Créateur principal d'atout\n" +
-                "Brian Lätt\n" +
+                "Brian Lätt (VerzatileDev)\n" +
                 "\n" +
                 "Créateur principal de son\n" +
                 "PEGONTHETRACK\n" +
@@ -166,7 +162,7 @@ public class CreditsScript : MonoBehaviour
                 "MartinJimbobBrockett\n" +
                 "\n" +
                 "Leitung Asset Design und Creation\n" +
-                "Brian Lätt\n" +
+                "Brian Lätt (VerzatileDev)\n" +
                 "\n" +
                 "Leitung Sound Design\n" +
                 "PEGONTHETRACK\n" +

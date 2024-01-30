@@ -715,7 +715,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Parallax Nova\n\nTeam Coordinator:\nMartinJimbobBrockett\n\nLead Programmer:\nMartinJimbobBrockett\n\nLead
-    Asset Design and Creation:\nBrian L\xE4tt\n\nLead Sound Design:\nPEGONTHETRACK\n\nSound
+    Asset Design and Creation:\nBrian L\xE4tt (VerzatileDev)\n\nLead Sound Design:\nPEGONTHETRACK\n\nSound
     Design Assistant:\nDarkxiety"
 --- !u!222 &1899599936
 CanvasRenderer:
