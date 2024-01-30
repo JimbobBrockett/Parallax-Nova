@@ -1,28 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class BackgroundImageScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float fixedRotationY = -90f;
+    [SerializeField] private float fixedRotationZ = 90f;
+    [SerializeField] private float rotationSpeed = 10f;
 
-    private void Awake()
-    {
-        if (GameObject.FindGameObjectsWithTag("BackgroundImage").Length > 1)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 0, 1) * Time.deltaTime * 10);
+        // Get the current rotation
+        Vector3 currentRotation = transform.eulerAngles;
+
+        // Apply the fixed rotations for Y and Z axes
+        currentRotation.y = fixedRotationY;
+        currentRotation.z = fixedRotationZ;
+
+        // Calculate rotation around the x-axis based on time and speed for a full circle
+        float rotationX = Mathf.Repeat(Time.time * rotationSpeed, 360f);
+        currentRotation.x = rotationX;
+
+        // Update the object's rotation
+        transform.eulerAngles = currentRotation;
     }
 }
